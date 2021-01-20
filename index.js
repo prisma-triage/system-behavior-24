@@ -48,17 +48,23 @@ WHERE
     const data2 = await prisma.user.findMany()
     console.log({ data2 })
   } catch (e) {
+    console.log(`First attempt after killing connection`)
     console.log(e)
   }
 
-  try {
-    setTimeout(async () => {
-      const data3 = await prisma.user.findMany()
-      console.log({ data3 })
-    }, 15001)
-  } catch (e) {
-    console.log(e)
-  }
+  let tryCount = 1
+
+  const interval = setInterval(async () => {
+    console.log(`Trying again, attempt number ${tryCount}`)
+    tryCount += 1
+    try {
+      const data = await prisma.user.findMany()
+      console.log({ data })
+      clearInterval(interval)
+    } catch (e) {
+      console.log(e)
+    }
+  }, 1000)
 }
 
 main().finally(() => {

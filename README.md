@@ -26,7 +26,7 @@ What `index.js` does:
 1. Runs query via Prisma, so `prisma` postgres user creates a connection
 2. Lists all connection pids from postgres user `prisma`
 3. Terminates those connections
-4. Runs another query via Prisma, it fails with
+4. Runs a query every second via Prisma, it fails with the following error 14 times but works on 15th attempt i.e. 15th second
 
 ```
 Invalid `prisma.user.findMany()` invocation:
@@ -36,5 +36,3 @@ Invalid `prisma.user.findMany()` invocation:
 
 This is a non-recoverable error which probably happens when the Prisma Query Engine has a panic.
 ```
-
-5. Runs another query via Prisma after 15s. It works.
