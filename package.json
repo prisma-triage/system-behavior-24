@@ -1,0 +1,14 @@
+{
+  "name": "system-behavior-24",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@prisma/cli": "2.15.0-dev.89",
+    "@types/pg": "^7.14.9"
+  },
+  "dependencies": {
+    "@prisma/client": "2.15.0-dev.89",
+    "pg": "^8.5.1"
+  }
+}
