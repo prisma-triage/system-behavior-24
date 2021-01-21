@@ -19,9 +19,9 @@ CREATE TABLE "public"."User" (
 ```
 
 3. `yarn`
-4. `node index.js`
+4. `node pg/index.js`
 
-What `index.js` does:
+What `pg/index.js` does:
 
 1. Runs query via Prisma, so `prisma` postgres user creates a connection
 2. Lists all connection pids from postgres user `prisma`
