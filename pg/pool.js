@@ -1,5 +1,4 @@
 //@ts-check
-const { PrismaClient } = require('@prisma/client')
 const { Client: PgClient, Pool } = require('pg')
 
 const pgClientConnection = new PgClient(
@@ -11,12 +10,11 @@ const pool = new Pool({
     'postgresql://prisma:prisma@localhost:5432/system-behavior-24?schema=public',
 })
 
-const prisma = new PrismaClient()
 async function main() {
   const pgClientQuery = await pool.connect()
 
-  const data1 = await prisma.user.findMany()
-  console.log({ data1 })
+  const data1 = await pgClientQuery.query(`SELECT * FROM "public"."User";`)
+  console.log({ data1: data1.rows })
 
   pgClientConnection.connect()
   const query = `

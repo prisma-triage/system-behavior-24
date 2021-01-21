@@ -6,11 +6,11 @@
   "devDependencies": {
     "@prisma/cli": "2.15.0-dev.89",
     "@types/mysql2": "types/mysql2",
-    "@types/pg": "^7.14.9"
+    "@types/pg": "7.14.9"
   },
   "dependencies": {
     "@prisma/client": "2.15.0-dev.89",
-    "mysql2": "^2.2.5",
-    "pg": "^8.5.1"
+    "mysql2": "2.2.5",
+    "pg": "8.5.1"
   }
 }

@@ -1,5 +1,4 @@
 //@ts-check
-const { PrismaClient } = require('@prisma/client')
 const { Client: PgClient } = require('pg')
 
 const pgClientConnection = new PgClient(
@@ -10,12 +9,16 @@ const pgClientQuery = new PgClient(
   'postgresql://prisma:prisma@localhost:5432/system-behavior-24?schema=public',
 )
 
-const prisma = new PrismaClient()
 async function main() {
-  const data1 = await prisma.user.findMany()
-  console.log({ data1 })
+  await pgClientConnection.connect()
+  await pgClientQuery.connect()
+  try {
+  } catch (e) {
+    console.log(`ZZ`, e)
+  }
+  const data1 = await pgClientQuery.query(`SELECT * FROM "public"."User";`)
+  console.log({ data1: data1.rows })
 
-  pgClientConnection.connect()
   const query = `
 select pid as process_id, 
   usename as username, 
@@ -49,9 +52,7 @@ WHERE
   console.log({ res })
 
   try {
-    console.log(`First attempt after killing connection`)
     const data2 = await pgClientQuery.query(`SELECT * FROM "public"."User";`)
-    console.log(`First attempt after killing connection success`)
     console.log({ data2: data2.rows })
   } catch (e) {
     console.log(`First attempt after killing connection`)
@@ -74,6 +75,8 @@ WHERE
   // }, 1000)
 }
 
-main().finally(() => {
-  //   prisma.$disconnect()
-})
+main()
+  .catch((e) => console.log(e))
+  .finally(() => {
+    //   prisma.$disconnect()
+  })
