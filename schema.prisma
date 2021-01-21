@@ -1,12 +1,12 @@
-datasource ds {
-    provider = "mysql"
-    url      = "mysql://prisma:prisma@localhost:3306/system-behavior-24"
-}
-
 // datasource ds {
-//     provider = "postgresql"
-//     url      = "postgresql://root2:prisma@localhost:5432/system-behavior-24?schema=public"
+//     provider = "mysql"
+//     url      = "mysql://prisma:prisma@localhost:3306/system-behavior-24"
 // }
+
+datasource ds {
+    provider = "postgresql"
+    url      = "postgresql://root2:prisma@localhost:5432/system-behavior-24?schema=public"
+}
 
 generator g {
     provider = "prisma-client-js"

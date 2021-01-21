@@ -59,21 +59,25 @@ WHERE
     console.log(e)
   }
 
-  // let tryCount = 1
+  let tryCount = 1
 
-  // const interval = setInterval(async () => {
-  //   console.log(`Trying again, attempt number ${tryCount}`)
-  //   tryCount += 1
-  //   try {
-  //     const data = await pgClientQuery.query(`SELECT * FROM "public"."User";`)
-  //     console.log({ data: data.rows })
-  //     console.log(`Interval query worked, terminating interval`)
-  //     clearInterval(interval)
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }, 1000)
+  const interval = setInterval(async () => {
+    console.log(`Trying again, attempt number ${tryCount}`)
+    tryCount += 1
+    try {
+      const data = await pgClientQuery.query(`SELECT * FROM "public"."User";`)
+      console.log({ data: data.rows })
+      console.log(`Interval query worked, terminating interval`)
+      clearInterval(interval)
+    } catch (e) {
+      console.log(e)
+    }
+  }, 1000)
 }
+
+process.on('uncaughtException', (err) => {
+  console.log(`Catching process exits`, err)
+})
 
 main()
   .catch((e) => console.log(e))
